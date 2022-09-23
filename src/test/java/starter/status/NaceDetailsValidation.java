@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class NaceDetailsValidation {
-    private String NACE_CODE_SEARCH ="http://localhost:3001/getNaceDetails/";
+    private String NACE_CODE_SEARCH ="https://getNaceDetails/";
     public Response response;
 
     public NaceDetailsValidation() throws IOException {
