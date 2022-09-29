@@ -1,5 +1,6 @@
 package starter.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import io.restassured.response.Response;
@@ -9,9 +10,14 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NaceDetailsValidation {
-    private String NACE_CODE_SEARCH ="https://getNaceDetails/";
+    private String NACE_CODE_SEARCH ="http://localhost:3001/getNaceDetails/";
     public Response response;
 
     public NaceDetailsValidation() throws IOException {
@@ -33,7 +39,7 @@ public class NaceDetailsValidation {
     public void validateJsonBody(String fileName) throws IOException {
         String localDir = System.getProperty("user.dir");
         String fileContent = FileUtils.readFileToString(new File(localDir+"/src/test/resources/templates/"+ fileName), "UTF-8");
-        String actualResponse = response.then().extract().body().toString();
+        String actualResponse = SerenityRest.lastResponse().getBody().asString();
         JsonParser parser = new JsonParser();
         JsonElement expected = parser.parse(fileContent);
         JsonElement actual = parser.parse(actualResponse);
