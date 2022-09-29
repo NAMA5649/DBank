@@ -1,6 +1,5 @@
 package starter.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import io.restassured.response.Response;
@@ -10,18 +9,10 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.util.stream.Collectors.toMap;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class NaceDetailsValidation {
     private String NACE_CODE_SEARCH ="http://localhost:3001/getNaceDetails/";
     public Response response;
-
-    public NaceDetailsValidation() throws IOException {
-    }
 
     @Step("I GET the details for NACE {}")
     public void getNACEDetails(String NACECode) {
